@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>cleanSlate.js demo</title>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+    <script type="text/javascript" src="cleanSlate.js"></script>
+
+    <script type="text/javascript">
+        window.addEventListener('keyup', function(e) {
+            if (String.fromCharCode(e.keyCode) === 'C') {
+                Clean.slate();
+            }
+        });
+
+        window.addEventListener('load', function() {
+            var timeoutId         = 0,
+                intervalId        = 0,
+                setTimeoutButton  = document.getElementById('set-timeout-button'),
+                setTimeoutValue   = document.getElementById('set-timeout-value'),
+                setIntervalButton = document.getElementById('set-interval-button'),
+                setIntervalValue  = document.getElementById('set-interval-value');
+
+            setTimeoutButton.addEventListener('click', function() {
+                setTimeoutValue.textContent = 'Waiting...';
+
+                ++timeoutId;
+                setTimeout(function() {
+                    setTimeoutValue.textContent = timeoutId;
+                }, 1000);
+            });
+
+            setIntervalButton.addEventListener('click', function() {
+                setInterval(function() {
+                    setIntervalValue.textContent = ++intervalId;
+                }, 250);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>cleanSlate.js demo</h1>
+
+        <p><strong>Hit <kbd>c</kbd> to clean the slate at any point.</strong></p>
+
+        <p>
+            Click <button id="set-timeout-button">here</button> to call <code>setTimeout</code> with
+            a callback that will set the value at the bottom left.
+        </p>
+
+        <p>
+            Click <button id="set-interval-button">here</button> to call <code>setInterval</code>
+            with a callback that will continuously increment the counter at the bottom right.
+        </p>
+
+        <footer>
+            <div id="set-timeout-value"></div>
+            <div id="set-interval-value"></div>
+        </footer>
+    </main>
+</body>
+
+</html>

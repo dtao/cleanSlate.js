@@ -1,0 +1,30 @@
+main {
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 1ex 1em;
+  background-color: #444;
+  color: #fff;
+}
+
+#set-timeout-value {
+  float: left;
+}
+
+#set-timeout-value:before {
+  content: "setTimeout value: ";
+}
+
+#set-interval-value {
+  float: right;
+}
+
+#set-interval-value:before {
+  content: "setInterval value: ";
+}
