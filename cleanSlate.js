@@ -47,16 +47,31 @@
   }
 
   window.Clean = {
-    slate: function() {
+    timeouts: function() {
       forEach(timeouts, window.clearTimeout);
-      forEach(intervals, window.clearInterval);
-      applyForEach(requests, XMLHttpRequest.prototype.abort);
-      applyForEach(workers, Worker.prototype.terminate);
+      timeouts.length = 0;
+    },
 
-      timeouts.length  = 0;
+    intervals: function() {
+      forEach(intervals, window.clearInterval);
       intervals.length = 0;
-      requests.length  = 0;
-      workers.length   = 0;
+    },
+
+    requests: function() {
+      applyForEach(requests, XMLHttpRequest.prototype.abort);
+      requests.length = 0;
+    },
+
+    workers: function() {
+      applyForEach(workers, Worker.prototype.terminate);
+      workers.length = 0;
+    },
+
+    slate: function() {
+      Clean.timeouts();
+      Clean.intervals();
+      Clean.requests();
+      Clean.workers();
     }
   };
 
