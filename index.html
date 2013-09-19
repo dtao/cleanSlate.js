@@ -19,7 +19,9 @@
                 setTimeoutButton  = document.getElementById('set-timeout-button'),
                 setTimeoutValue   = document.getElementById('set-timeout-value'),
                 setIntervalButton = document.getElementById('set-interval-button'),
-                setIntervalValue  = document.getElementById('set-interval-value');
+                setIntervalValue  = document.getElementById('set-interval-value'),
+                requestButton     = document.getElementById('request-button'),
+                requestResult     = document.getElementById('request-result');
 
             setTimeoutButton.addEventListener('click', function() {
                 setTimeoutValue.textContent = 'Waiting...';
@@ -34,6 +36,19 @@
                 setInterval(function() {
                     setIntervalValue.textContent = ++intervalId;
                 }, 250);
+            });
+
+            requestButton.addEventListener('click', function() {
+                requestResult.value = 'Loading...';
+
+                var request = new XMLHttpRequest();
+                request.open('GET', 'cleanSlate.js?' + new Date().getTime());
+
+                request.addEventListener('load', function() {
+                    requestResult.value = request.responseText;
+                });
+
+                request.send();
             });
         });
     </script>
@@ -54,6 +69,13 @@
             Click <button id="set-interval-button">here</button> to call <code>setInterval</code>
             with a callback that will continuously increment the counter at the bottom right.
         </p>
+
+        <p>
+            Click <button id="request-button">here</button> to send an <code>XMLHttpRequest</code>
+            to fetch cleanSlate.js, which will go here:
+        </p>
+
+        <textarea id="request-result"></textarea>
 
         <footer>
             <div id="set-timeout-value"></div>

@@ -28,3 +28,8 @@ footer {
 #set-interval-value:before {
   content: "setInterval value: ";
 }
+
+#request-result {
+  height: 300px;
+  width: 75%;
+}
