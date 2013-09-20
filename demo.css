@@ -4,6 +4,10 @@ main {
   margin: auto;
 }
 
+code {
+  color: #f44;
+}
+
 footer {
   position: absolute;
   left: 0;
@@ -29,7 +33,7 @@ footer {
   content: "setInterval value: ";
 }
 
-#request-result {
-  height: 300px;
+#request-result, #worker-result {
+  height: 150px;
   width: 75%;
 }

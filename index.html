@@ -21,7 +21,10 @@
                 setIntervalButton = document.getElementById('set-interval-button'),
                 setIntervalValue  = document.getElementById('set-interval-value'),
                 requestButton     = document.getElementById('request-button'),
-                requestResult     = document.getElementById('request-result');
+                requestResult     = document.getElementById('request-result'),
+                workerButton      = document.getElementById('worker-button'),
+                workerInput       = document.getElementById('worker-input'),
+                workerResult      = document.getElementById('worker-result');
 
             setTimeoutButton.addEventListener('click', function() {
                 setTimeoutValue.textContent = 'Waiting...';
@@ -50,6 +53,18 @@
 
                 request.send();
             });
+
+            workerButton.addEventListener('click', function() {
+                workerResult.value = 'Working...';
+
+                var worker = new Worker('demo.js');
+
+                worker.addEventListener('message', function(e) {
+                    workerResult.value = e.data;
+                });
+
+                worker.postMessage(workerInput.value);
+            });
         });
     </script>
 </head>
@@ -72,10 +87,19 @@
 
         <p>
             Click <button id="request-button">here</button> to send an <code>XMLHttpRequest</code>
-            to fetch cleanSlate.js, which will go here:
+            to fetch cleanSlate.js, which will go in the <code>&lt;textarea&gt;</code> below.
         </p>
 
         <textarea id="request-result"></textarea>
+
+        <p>
+            Click <button id="worker-button">here</button> to create a <code>Worker</code> and send
+            it this message: <input type="text" id="worker-input" value="Hello, worker!" /><br />
+            <br />
+            The worker will respond after 1 second in the <code>&lt;textarea&gt;</code> below.
+        </p>
+
+        <textarea id="worker-result"></textarea>
 
         <footer>
             <div id="set-timeout-value"></div>
