@@ -7,6 +7,15 @@ This micro-library provides a way to reset any pending asynchronous actions in t
 Clean.slate();
 ```
 
+Why does this exist?
+====================
+
+I was using [Turbolinks](https://github.com/rails/turbolinks) and discovered that my calls to `setTimeout` were persisting between page changes.
+
+I [opened a pull request](https://github.com/rails/turbolinks/pull/268) to change this behavior, but the maintainers (rightly) pointed out that you may *want* persistent asynchronous operations between page changes.
+
+Of course, you might not. So this library is for anyone using a system of simulating page refreshes using AJAX requests (Turbolinks, pjax, jQuery Mobile, etc.) who wants a page *change* to act like a page *refresh*.
+
 What gets reset?
 ================
 
